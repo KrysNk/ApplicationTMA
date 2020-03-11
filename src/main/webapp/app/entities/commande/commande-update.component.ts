@@ -7,6 +7,8 @@ import { Observable } from 'rxjs';
 
 import { ICommande, Commande } from 'app/shared/model/commande.model';
 import { CommandeService } from './commande.service';
+import { IClient } from 'app/shared/model/client.model';
+import { ClientService } from 'app/entities/client/client.service';
 
 @Component({
   selector: 'jhi-commande-update',
@@ -14,19 +16,29 @@ import { CommandeService } from './commande.service';
 })
 export class CommandeUpdateComponent implements OnInit {
   isSaving = false;
+  clients: IClient[] = [];
 
   editForm = this.fb.group({
     id: [],
     magasin: [],
     produit: [],
-    prix: []
+    prix: [],
+    date: [],
+    client: []
   });
 
-  constructor(protected commandeService: CommandeService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
+  constructor(
+    protected commandeService: CommandeService,
+    protected clientService: ClientService,
+    protected activatedRoute: ActivatedRoute,
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ commande }) => {
       this.updateForm(commande);
+
+      this.clientService.query().subscribe((res: HttpResponse<IClient[]>) => (this.clients = res.body || []));
     });
   }
 
@@ -35,7 +47,9 @@ export class CommandeUpdateComponent implements OnInit {
       id: commande.id,
       magasin: commande.magasin,
       produit: commande.produit,
-      prix: commande.prix
+      prix: commande.prix,
+      date: commande.date,
+      client: commande.client
     });
   }
 
@@ -59,7 +73,9 @@ export class CommandeUpdateComponent implements OnInit {
       id: this.editForm.get(['id'])!.value,
       magasin: this.editForm.get(['magasin'])!.value,
       produit: this.editForm.get(['produit'])!.value,
-      prix: this.editForm.get(['prix'])!.value
+      prix: this.editForm.get(['prix'])!.value,
+      date: this.editForm.get(['date'])!.value,
+      client: this.editForm.get(['client'])!.value
     };
   }
 
@@ -77,5 +93,9 @@ export class CommandeUpdateComponent implements OnInit {
 
   protected onSaveError(): void {
     this.isSaving = false;
+  }
+
+  trackById(index: number, item: IClient): any {
+    return item.id;
   }
 }

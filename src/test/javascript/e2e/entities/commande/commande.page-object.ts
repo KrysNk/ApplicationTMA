@@ -32,6 +32,9 @@ export class CommandeUpdatePage {
   magasinInput = element(by.id('field_magasin'));
   produitInput = element(by.id('field_produit'));
   prixInput = element(by.id('field_prix'));
+  dateInput = element(by.id('field_date'));
+
+  clientSelect = element(by.id('field_client'));
 
   async getPageTitle(): Promise<string> {
     return this.pageTitle.getAttribute('jhiTranslate');
@@ -59,6 +62,33 @@ export class CommandeUpdatePage {
 
   async getPrixInput(): Promise<string> {
     return await this.prixInput.getAttribute('value');
+  }
+
+  async setDateInput(date: string): Promise<void> {
+    await this.dateInput.sendKeys(date);
+  }
+
+  async getDateInput(): Promise<string> {
+    return await this.dateInput.getAttribute('value');
+  }
+
+  async clientSelectLastOption(): Promise<void> {
+    await this.clientSelect
+      .all(by.tagName('option'))
+      .last()
+      .click();
+  }
+
+  async clientSelectOption(option: string): Promise<void> {
+    await this.clientSelect.sendKeys(option);
+  }
+
+  getClientSelect(): ElementFinder {
+    return this.clientSelect;
+  }
+
+  async getClientSelectedOption(): Promise<string> {
+    return await this.clientSelect.element(by.css('option:checked')).getText();
   }
 
   async save(): Promise<void> {

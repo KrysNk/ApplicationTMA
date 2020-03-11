@@ -43,12 +43,15 @@ describe('Commande e2e test', () => {
     await promise.all([
       commandeUpdatePage.setMagasinInput('magasin'),
       commandeUpdatePage.setProduitInput('produit'),
-      commandeUpdatePage.setPrixInput('5')
+      commandeUpdatePage.setPrixInput('5'),
+      commandeUpdatePage.setDateInput('date'),
+      commandeUpdatePage.clientSelectLastOption()
     ]);
 
     expect(await commandeUpdatePage.getMagasinInput()).to.eq('magasin', 'Expected Magasin value to be equals to magasin');
     expect(await commandeUpdatePage.getProduitInput()).to.eq('produit', 'Expected Produit value to be equals to produit');
     expect(await commandeUpdatePage.getPrixInput()).to.eq('5', 'Expected prix value to be equals to 5');
+    expect(await commandeUpdatePage.getDateInput()).to.eq('date', 'Expected Date value to be equals to date');
 
     await commandeUpdatePage.save();
     expect(await commandeUpdatePage.getSaveButton().isPresent(), 'Expected save button disappear').to.be.false;

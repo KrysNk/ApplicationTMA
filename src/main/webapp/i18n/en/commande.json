@@ -18,7 +18,9 @@
       },
       "magasin": "Magasin",
       "produit": "Produit",
-      "prix": "Prix"
+      "prix": "Prix",
+      "date": "Date",
+      "client": "Client"
     }
   }
 }

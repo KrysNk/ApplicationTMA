@@ -1,10 +1,21 @@
 entity Commande {
 	magasin String,
     produit String,
-    prix Integer
+    prix Integer,
+    date String
     
 }
 
+entity Client {
+	name String,
+    prenom String,
+    adresse String,
+    telephone Integer
+    
+}
+relationship ManyToOne {
+	Commande{client(name)} to Client
+}
 // Set pagination options
 paginate Commande with infinite-scroll
 

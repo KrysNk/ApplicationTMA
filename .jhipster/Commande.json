@@ -12,9 +12,21 @@
         {
             "fieldName": "prix",
             "fieldType": "Integer"
+        },
+        {
+            "fieldName": "date",
+            "fieldType": "String"
         }
     ],
-    "relationships": [],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "client",
+            "otherEntityRelationshipName": "commande",
+            "relationshipName": "client",
+            "otherEntityField": "name"
+        }
+    ],
     "changelogDate": "20200311141400",
     "entityTableName": "commande",
     "dto": "no",

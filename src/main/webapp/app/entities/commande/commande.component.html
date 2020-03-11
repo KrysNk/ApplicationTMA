@@ -26,6 +26,8 @@
                     <th scope="col"  jhiSortBy="magasin"><span jhiTranslate="applicationTmaApp.commande.magasin">Magasin</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="produit"><span jhiTranslate="applicationTmaApp.commande.produit">Produit</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="prix"><span jhiTranslate="applicationTmaApp.commande.prix">Prix</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="date"><span jhiTranslate="applicationTmaApp.commande.date">Date</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="client.name"><span jhiTranslate="applicationTmaApp.commande.client">Client</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -35,6 +37,12 @@
                     <td>{{ commande.magasin }}</td>
                     <td>{{ commande.produit }}</td>
                     <td>{{ commande.prix }}</td>
+                    <td>{{ commande.date }}</td>
+                    <td>
+                        <div *ngIf="commande.client">
+                            <a [routerLink]="['/client', commande.client?.id, 'view']" >{{ commande.client?.name }}</a>
+                        </div>
+                    </td>
                     <td class="text-right">
                         <div class="btn-group">
                             <button type="submit"

@@ -1,5 +1,6 @@
 package com.tma.myapp.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -31,6 +32,13 @@ public class Commande implements Serializable {
 
     @Column(name = "prix")
     private Integer prix;
+
+    @Column(name = "date")
+    private String date;
+
+    @ManyToOne
+    @JsonIgnoreProperties("commandes")
+    private Client client;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -79,6 +87,32 @@ public class Commande implements Serializable {
     public void setPrix(Integer prix) {
         this.prix = prix;
     }
+
+    public String getDate() {
+        return date;
+    }
+
+    public Commande date(String date) {
+        this.date = date;
+        return this;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public Commande client(Client client) {
+        this.client = client;
+        return this;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
@@ -104,6 +138,7 @@ public class Commande implements Serializable {
             ", magasin='" + getMagasin() + "'" +
             ", produit='" + getProduit() + "'" +
             ", prix=" + getPrix() +
+            ", date='" + getDate() + "'" +
             "}";
     }
 }

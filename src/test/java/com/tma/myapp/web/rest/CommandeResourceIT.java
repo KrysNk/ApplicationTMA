@@ -40,6 +40,9 @@ public class CommandeResourceIT {
     private static final Integer DEFAULT_PRIX = 1;
     private static final Integer UPDATED_PRIX = 2;
 
+    private static final String DEFAULT_DATE = "AAAAAAAAAA";
+    private static final String UPDATED_DATE = "BBBBBBBBBB";
+
     @Autowired
     private CommandeRepository commandeRepository;
 
@@ -64,7 +67,8 @@ public class CommandeResourceIT {
         Commande commande = new Commande()
             .magasin(DEFAULT_MAGASIN)
             .produit(DEFAULT_PRODUIT)
-            .prix(DEFAULT_PRIX);
+            .prix(DEFAULT_PRIX)
+            .date(DEFAULT_DATE);
         return commande;
     }
     /**
@@ -77,7 +81,8 @@ public class CommandeResourceIT {
         Commande commande = new Commande()
             .magasin(UPDATED_MAGASIN)
             .produit(UPDATED_PRODUIT)
-            .prix(UPDATED_PRIX);
+            .prix(UPDATED_PRIX)
+            .date(UPDATED_DATE);
         return commande;
     }
 
@@ -104,6 +109,7 @@ public class CommandeResourceIT {
         assertThat(testCommande.getMagasin()).isEqualTo(DEFAULT_MAGASIN);
         assertThat(testCommande.getProduit()).isEqualTo(DEFAULT_PRODUIT);
         assertThat(testCommande.getPrix()).isEqualTo(DEFAULT_PRIX);
+        assertThat(testCommande.getDate()).isEqualTo(DEFAULT_DATE);
     }
 
     @Test
@@ -139,7 +145,8 @@ public class CommandeResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(commande.getId().intValue())))
             .andExpect(jsonPath("$.[*].magasin").value(hasItem(DEFAULT_MAGASIN)))
             .andExpect(jsonPath("$.[*].produit").value(hasItem(DEFAULT_PRODUIT)))
-            .andExpect(jsonPath("$.[*].prix").value(hasItem(DEFAULT_PRIX)));
+            .andExpect(jsonPath("$.[*].prix").value(hasItem(DEFAULT_PRIX)))
+            .andExpect(jsonPath("$.[*].date").value(hasItem(DEFAULT_DATE)));
     }
     
     @Test
@@ -155,7 +162,8 @@ public class CommandeResourceIT {
             .andExpect(jsonPath("$.id").value(commande.getId().intValue()))
             .andExpect(jsonPath("$.magasin").value(DEFAULT_MAGASIN))
             .andExpect(jsonPath("$.produit").value(DEFAULT_PRODUIT))
-            .andExpect(jsonPath("$.prix").value(DEFAULT_PRIX));
+            .andExpect(jsonPath("$.prix").value(DEFAULT_PRIX))
+            .andExpect(jsonPath("$.date").value(DEFAULT_DATE));
     }
 
     @Test
@@ -181,7 +189,8 @@ public class CommandeResourceIT {
         updatedCommande
             .magasin(UPDATED_MAGASIN)
             .produit(UPDATED_PRODUIT)
-            .prix(UPDATED_PRIX);
+            .prix(UPDATED_PRIX)
+            .date(UPDATED_DATE);
 
         restCommandeMockMvc.perform(put("/api/commandes")
             .contentType(MediaType.APPLICATION_JSON)
@@ -195,6 +204,7 @@ public class CommandeResourceIT {
         assertThat(testCommande.getMagasin()).isEqualTo(UPDATED_MAGASIN);
         assertThat(testCommande.getProduit()).isEqualTo(UPDATED_PRODUIT);
         assertThat(testCommande.getPrix()).isEqualTo(UPDATED_PRIX);
+        assertThat(testCommande.getDate()).isEqualTo(UPDATED_DATE);
     }
 
     @Test

@@ -20,6 +20,16 @@
                 <dd>
                     <span>{{ commande.prix }}</span>
                 </dd>
+                <dt><span jhiTranslate="applicationTmaApp.commande.date">Date</span></dt>
+                <dd>
+                    <span>{{ commande.date }}</span>
+                </dd>
+                <dt><span jhiTranslate="applicationTmaApp.commande.client">Client</span></dt>
+                <dd>
+                    <div *ngIf="commande.client">
+                        <a [routerLink]="['/client', commande.client?.id, 'view']">{{ commande.client?.name }}</a>
+                    </div>
+                </dd>
             </dl>
 
             <button type="submit"

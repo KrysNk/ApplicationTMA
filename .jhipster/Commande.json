@@ -1,0 +1,29 @@
+{
+    "name": "Commande",
+    "fields": [
+        {
+            "fieldName": "magasin",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "produit",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "prix",
+            "fieldType": "Integer"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20200311141400",
+    "entityTableName": "commande",
+    "dto": "no",
+    "pagination": "infinite-scroll",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "embedded": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}
